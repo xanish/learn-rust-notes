@@ -56,5 +56,96 @@ fn main() {
 - `cargo doc --open` will open docs containing docs of all dependencies used in your project
 
 ## Guessing Game
-
 - check code and comments [guessing_game](./src/guessing_game/src/main.rs)
+
+## Variables and Mutability
+- All variables immutable by default, defined by `let`
+- Use `mut` keyword to make them mutable
+- Constants are the same as in other languages and defined using `const`
+- Variables can be shadowed by declaring them again using let keyword, refer [shadowing](./src/shadow/main.rs)
+- Shadowing can allow us to redefine an immutable variable and then still have it as immutable if we dont use mut
+- Shadowing allows changing a variables type, but a mutable variable cant change its type
+
+## Data Types
+- Scalar types
+  - Integer
+    - i8 or u8 -> signed or unsigned
+    - i16 or u16 -> signed or unsigned
+    - i32 or u32 -> signed or unsigned (i32 is default)
+    - i64 or u64 -> signed or unsigned
+    - i128 or u128 -> signed or unsigned
+    - isize or usize -> signed or unsigned (size takes the max supported by system architecture)
+    - On release builds rust wraps around integer values on overflow and causes program to "panic" at runtime in debug builds
+    - Rust also provides some methods to gracefully handle wrapping as needed on runtime using
+      - wrapping_*
+      - checked_*
+      - overflowing_*
+      - saturating_*
+  - Float
+    - f32
+    - f64 -> default
+  - Boolean
+    - bool
+  - Character
+    - char (use single quotes)
+    - char in rust is 4 bytes and not 1 byte like other languages
+    - It can represent unicode chars
+- Compound types
+  - Tuple
+    - Bunch of different types of values together
+    - Concept same as python tuples (cannot be modified / grown / shrunk)
+    - eg `let tup: (i32, f64, u8) = (500, 6.4, 1);`
+    - To extract values use `let (x, y, z) = tup;` -> destructuring
+    - Can also do `tup.0` or `tup.1` or `tup.2` to access values
+    - A tuple without any values has a special name, unit written as `()` represents empty value or return type
+  - Array
+    - Have fixed length
+    - eg `let a = [1, 2, 3, 4, 5];` or `let a: [i32; 5] = [1, 2, 3, 4, 5];`
+    - `let a = [3; 5];` -> creates an array with five 3's
+    - Individual elements accessed the same way as other languages
+
+## Functions
+- Pretty much same as other languages, just need to specify types of params
+```rust
+fn main() {
+  // the {} block scope itself is an expression
+  // expressions evaluate and return value
+  // statements do not return a value
+  // also rust does not allow
+  // x = y = b kind of syntax since assignment not an 
+  // expression and does not return the assigned value
+  let y = {
+      let x = 3;
+      // note that if we add a semicolon here this becomes
+      // a statement and wont return the value
+      // resulting in a compile time error
+      // any expression in rust does not end in semicolon
+      x + 1
+  };
+
+  println!("The value of y is: {y}");
+}
+```
+- Function return types in rust specified same way as python
+- To return a value in rust its just an expression
+- So we can just write
+```rust
+// do this
+fn add(x: i32, y: i32) -> i64 {
+  x + y
+}
+
+// instead of
+// return keyword does exist and work
+// but is generally omitted if at the end
+fn add(x: i32, y: i32) -> i64 {
+  return x + y;
+}
+```
+
+## Control
+- check code and comments [control](./src/control/main.rs)
+
+## Practice
+- [Temperature converter](./src/temperature_converter/src/main.rs)
+- [Nth fibonacci](./src/nth_fibonacci/src/main.rs)
