@@ -149,3 +149,15 @@ fn add(x: i32, y: i32) -> i64 {
 ## Practice
 - [Temperature converter](./src/temperature_converter/src/main.rs)
 - [Nth fibonacci](./src/nth_fibonacci/src/main.rs)
+
+## Ownership
+- All heap data must be owned by exactly one variable (Use Box to own some memory on heap)
+- Rust deallocates heap data once its owner goes out of scope
+- Ownership can be transferred by moves, which happen on assignments and function calls
+- Heap data can only be accessed through its current owner, not a previous owner (if you reassign a heap variable then dont use older one since it gets deallocated)
+
+## Referencing and Borrowing
+- [Referencing](./src/referencing/main.rs)
+- Dereferencing is same as cpp using `*`
+- For boxes or boxlike variables rust does not allow aliasing or assignment (if you assign then ownership gets transferred and old variable deallocated)
+- Better to refer [this](https://rust-book.cs.brown.edu/ch04-02-references-and-borrowing.html) no point in writing when examples are self explanatory
